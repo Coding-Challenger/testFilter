@@ -20,16 +20,21 @@ RUN docker-php-ext-install pdo_mysql exif pcntl bcmath gd
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
+ADD . /var/www
+
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Permissions...
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
-COPY --chown=www:www . /var/www
-RUN chown -R root:www-data /var/www/html
+
+
+RUN chown -R www-data:www-data /var/www
+
+RUN chmod u+rwx,g+rx,o+rx /var/www
 RUN chown -R www-data:www-data /var/www/bootstrap/cache /var/www/storage
-USER www
+RUN find /var/www -type d -exec chmod u+rwx,g+rx,o+rx {} +
+RUN find /var/www -type f -exec chmod u+rw,g+rw,o+r {} +
+
+USER 1000
 
 # Set working directory
 WORKDIR /var/www
