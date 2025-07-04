@@ -13,7 +13,6 @@ class ProductSearchFilterTest extends TestCase
     {
         foreach (range(0, 5) as $item) {
             $product = Product::with(['brand', 'category'])->inRandomOrder()->first();
-            dump($product->name);
             Livewire::test(ProductSearch::class)
                 ->assertSeeLivewire(ProductSearch::class)
                 ->assertOk()
