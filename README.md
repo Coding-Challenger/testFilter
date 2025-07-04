@@ -60,7 +60,7 @@ Make sure you have the following installed:
 
 Lets go to the
 
-[http://localhost/productSearch](http://localhost:8051/productSearch)
+[http://localhost:8051/productSearch](http://localhost:8051/productSearch)
 
 ## Run the tests, just go to your terminal..
 
