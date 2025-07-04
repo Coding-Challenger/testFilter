@@ -32,6 +32,15 @@ services:
     networks:
       - app
 
+  node:
+    image: node:20-alpine
+    container_name: node
+    working_dir: /app
+    user: "1000"
+    volumes:
+      - ./:/app
+    command: [ "npm", "install" ]
+
 networks:
   app:
     driver: bridge
