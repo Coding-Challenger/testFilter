@@ -41,7 +41,8 @@ class ProductSearch extends Component
 
         ->when(strlen($this->search) > 0, fn($query) => $query->where('name', 'like', '%' . $this->search . '%'))
         ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
-        ->when(!empty($this->selectedBrands), fn($query) => $query->whereIn('brand_id', $this->selectedBrands));
+        ->when(!empty($this->selectedBrands), fn($query) => $query->whereIn('brand_id', $this->selectedBrands))
+        ->orderBy('name');
 
         return view('livewire.product-search', [
             'products' => $query->paginate(10),
